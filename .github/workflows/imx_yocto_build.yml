@@ -15,7 +15,8 @@ on:
 
 env:
   IMX_RELEASE: "imx-6.6.52-2.2.0_custom"
-  YOCTO_DIR: "${GITHUB_WORKSPACE}/imx-6.6.52-2.2.0_custom-build"
+  #YOCTO_DIR: "${GITHUB_WORKSPACE}/imx-6.6.52-2.2.0_custom-build"
+  YOCTO_DIR: "/opt/imx-6.6.52-2.2.0_custom-build"
   MACHINE: "imx8mpevk"
   DISTRO: "fsl-imx-xwayland"
   IMAGES: "core-image-minimal"
