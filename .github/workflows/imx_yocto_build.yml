@@ -13,6 +13,16 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  IMX_RELEASE: "imx-6.6.52-2.2.0_custom"
+  YOCTO_DIR: "${GITHUB_WORKSPACE}/${IMX_RELEASE}-build"
+  MACHINE: "imx8mpevk"
+  DISTRO: "fsl-imx-xwayland"
+  IMAGES: "core-image-minimal"
+  REMOTE: "https://github.com/nxp-imx/imx-manifest"
+  BRANCH: "imx-linux-scarthgap"
+  MANIFEST: ${IMX_RELEASE}".xml"
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -31,8 +41,8 @@ jobs:
           echo "`df -h`"
           echo "Host CPU info:"
           echo "`cat /proc/cpuinfo`"
-          echo "check /opt content"
-          echo "`du -h /opt`"
+          #echo "check /opt content"
+          #echo "`du -h /opt`"
       # Install yocto package
       - name: Install packages
         run: |
@@ -49,7 +59,31 @@ jobs:
           chmod a+x $GITHUB_WORKSPACE/bin/repo
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
           echo "---GITHUB_PATH : $GITHUB_PATH"
-        
+      # Download source code & build
+      - name: Download source code
+        run: |
+          # Download manifest repo and sync code
+          #mkdir -p /opt/buildroot_sdk
+          #cd /opt/buildroot_sdk
+          #repo init -u ${{github.event.inputs.manifest-url}} -b ${{github.event.inputs.manifest-branches-tags}} -m ${{github.event.inputs.manifest-file}}
+
+          #echo "--- repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE} ---"
+          #repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE}
+          #repo sync
+          mkdir -p ${YOCTO_DIR}
+          cd ${YOCTO_DIR}
+
+          #Init
+          repo init \
+               -u ${REMOTE} \
+               -b ${BRANCH} \
+               -m ${MANIFEST}
+          repo sync -j`nproc`
+          # source the yocto env
+          EULA=1 MACHINE="${MACHINE}" DISTRO="${DISTRO}" source imx-setup-release.sh -b build_${DISTRO}
+          # Build
+          bitbake ${IMAGES}
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
