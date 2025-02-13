@@ -15,13 +15,14 @@ on:
 
 env:
   IMX_RELEASE: "imx-6.6.52-2.2.0_custom"
-  YOCTO_DIR: "${GITHUB_WORKSPACE}/${IMX_RELEASE}-build"
+  YOCTO_DIR: "${GITHUB_WORKSPACE}/imx-6.6.52-2.2.0_custom-build"
   MACHINE: "imx8mpevk"
   DISTRO: "fsl-imx-xwayland"
   IMAGES: "core-image-minimal"
   REMOTE: "https://github.com/nxp-imx/imx-manifest"
   BRANCH: "imx-linux-scarthgap"
-  MANIFEST: "${IMX_RELEASE}.xml"
+  #MANIFEST: "${IMX_RELEASE}.xml"
+  MANIFEST: "imx-6.6.52-2.2.0_custom.xml"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -70,6 +71,7 @@ jobs:
           #echo "--- repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE} ---"
           #repo init -u ${MANIFEST_URL} -b ${MANIFEST_BRANCHES_TAGS} -m ${MANIFEST_FILE}
           #repo sync
+          echo "IMX_RELEASE"
           mkdir -p ${YOCTO_DIR}
           cd ${YOCTO_DIR}
 
