@@ -76,6 +76,7 @@ jobs:
           cd ${YOCTO_DIR}
 
           #Init
+          echo "===> repo init -u ${REMOTE} -b ${BRANCH} -m ${MANIFEST} <==="
           repo init \
                -u ${REMOTE} \
                -b ${BRANCH} \
