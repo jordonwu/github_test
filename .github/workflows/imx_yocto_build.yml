@@ -19,7 +19,7 @@ env:
   MACHINE: "imx8mpevk"
   DISTRO: "fsl-imx-xwayland"
   IMAGES: "core-image-minimal"
-  REMOTE: "https://github.com/nxp-imx/imx-manifest"
+  REMOTE: "https://github.com/jordonwu/nxp-imx_imx-manifest.git"
   BRANCH: "imx-linux-scarthgap"
   #MANIFEST: "${IMX_RELEASE}.xml"
   MANIFEST: "imx-6.6.52-2.2.0_custom.xml"
