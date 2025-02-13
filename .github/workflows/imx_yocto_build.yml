@@ -21,7 +21,7 @@ env:
   IMAGES: "core-image-minimal"
   REMOTE: "https://github.com/nxp-imx/imx-manifest"
   BRANCH: "imx-linux-scarthgap"
-  MANIFEST: ${IMX_RELEASE}".xml"
+  MANIFEST: "${IMX_RELEASE}.xml"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
