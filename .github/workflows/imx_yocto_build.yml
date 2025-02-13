@@ -30,8 +30,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    #runs-on: ubuntu-latest
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    #runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -54,6 +54,8 @@ jobs:
             python3-pip python3-pexpect xz-utils debianutils iputils-ping \
             libsdl1.2-dev xterm tar locales net-tools rsync sudo vim curl zstd \
             liblz4-tool libssl-dev bc lzop libgnutls28-dev efitools git-lfs
+          #
+          sudo apparmor_parser -R /etc/apparmor.d/unprivileged_userns
           #echo "pip install pylibfdt"
           #pip install pylibfdt
           # Install repo tool and add to $PATH
