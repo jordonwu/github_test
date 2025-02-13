@@ -31,6 +31,8 @@ jobs:
           echo "`df -h`"
           echo "Host CPU info:"
           echo "`cat /proc/cpuinfo`"
+          echo "check /opt content"
+          echo "`du -h /opt`"
       # Install yocto package
       - name: Install packages
         run: |
